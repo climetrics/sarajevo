@@ -22,7 +22,7 @@ library(rsconnect)
 </style>
 
 <div class="row" style="padding-top: 30px;">
-<div class="col-sm-8">
+<div class="col-sm-10">
 <div align="justify">
 
 ## Current trends
@@ -55,6 +55,7 @@ p <- p %>% layout(title = '',
 p
 
 ```
+
 ### Sector decomposition
 
 In terms of sector breakdown, residential buildings and road transport dominate the share of total emissions in the canton - see Figure 2. Combined, these two sectors were associated with over 60% of total emissions in the year 2020. Non-residential buildings associated with services and commerce make up circa 13% of emissions while the industry sector is associated with 15% of total GHG emissions. Emissions from electricity are accounted in each sector respectively. How sector-specific emissions evolved post-pandemic is unclear but judging from other [monitoring services](https://carbonmonitor.org/variation) transport, power and industry should lead the way. Note that the sector breakdown presented in Figure 2 tries to be as close as possible to that required by the [Covenant of Mayors](https://www.globalcovenantofmayors.org/) (CoM) but other allocations are possible.
@@ -82,3 +83,4 @@ knitr::kable(taba, "simple", caption = "Table 1 - Average change for the 2016-20
 
 ```
 
+***

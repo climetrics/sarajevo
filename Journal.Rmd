@@ -17,15 +17,16 @@ library(plotly)
 </style>
 
 <div class="row" style="padding-top: 30px;">
-<div class="col-sm-8">
+<div class="col-sm-10">
 <div align="justify">
 
 ## Methodology
 
-Overall methodology to determine sector GHG emission is shown in Figure 2. First the values of fuel and energy usage contained in the energy balances are structured along relevant sectors that better match those in the CoM template. Then emission factors are applied accordingly covering fuel to energy or energy directly into CO2 and CH4 emissions. This procedure is common for the cases of emission in the transport, buildings, electricity and industry. For the case of CH4 emissions from waste disposal are determined following the approach [IPCC default method approach](https://www.ipcc-nggip.iges.or.jp/public/gp/bgp/5_1_CH4_Solid_Waste.pdf).
+Overall methodology to determine sector GHG emission is shown in Figure 1. First the values of fuel and energy usage contained in the energy balances are structured along relevant sectors that better match those in the CoM template. Then emission factors are applied accordingly covering fuel to energy or energy directly into CO2 and CH4 emissions. This procedure is common for the cases of emission in the transport, buildings, electricity and industry. For the case of CH4 emissions from waste disposal are determined following the approach [IPCC default method approach](https://www.ipcc-nggip.iges.or.jp/public/gp/bgp/5_1_CH4_Solid_Waste.pdf).
 
 
-![Figure 2 - Overall methodology converting energy to GHG emissions](https://ghg-sarajevo.s3.eu-central-1.amazonaws.com/method.jpg)
+![Figure 1 - Overall methodology converting energy to GHG emissions](https://ghg-sarajevo.s3.eu-central-1.amazonaws.com/method.jpg)
+***
 
 ## Emission factors
 
@@ -71,3 +72,5 @@ tab2<-cbind.data.frame("Activity"=activity,"Region"=region,"Conversion"=conversi
 knitr::kable(tab2, "simple", caption = "Table 3 - Comparisson of emission factors for electricty supply")
 
 ```
+
+***

@@ -19,36 +19,23 @@ output:
 </style>
 
 <div class="row" style="padding-top: 30px;">
-<div class="col-sm-8">
+<div class="col-sm-10">
 <div align="justify">
 
-## Sarajevo emission inventory
+## Sarajevo canton
 ### Summary
-This website details the data and methodology for converting Sarajevo's energy balances into a Greenhouse Gas (GHG) inventory. The inventory covers the energy intensive sectors of buildings, electricity, transport and industry. In addition, emissions associated with waste disposal are also evaluated (see FIgure 1).
+This website details the data and methodology for converting Sarajevo's energy balances into a Greenhouse Gas (GHG) inventory. The inventory covers the energy intensive sectors of buildings, electricity, transport and industry. In addition, emissions associated with waste disposal are also evaluated (see Figure 1).
 
 ![Figure 1 - Economic sectors included in the emission inventory](https://ghg-sarajevo.s3.eu-central-1.amazonaws.com/scope.jpg){width=700px}
 
-The bulk of the data used is taken from the energy balances published by the Ministry of Economy [(Ministarstvo privrede)](https://mp.ks.gov.ba/) and included the needs for electricity, natural gas, oil derivatives and solid fuels associated with annual consumption in the canton. Balances were available on an yearly basis and for the purposes of this inventory data for the years 2016 to 2020 is used.
+The bulk of the data used is taken from the energy balances published by the Ministry of Economy [(Ministarstvo privrede)](https://mp.ks.gov.ba/) and included the needs for electricity, natural gas, oil derivatives and solid fuels associated with annual consumption in the canton (see links tod ata in section References below). Balances were available on an yearly basis and for the purposes of this inventory data for the years 2016 to 2020 is used.
 
-[Energetskog bilansa Kantona Sarajevo za 2020](https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_e_potreba_0.pdf)
+The main results of the inventory can be seen in the section [Monitoring](https://climetrics.github.io/sarajevo/Links.html). while details of the methods and data used can be consulted in section [Methodology](https://climetrics.github.io/sarajevo/Journal.html).
 
-[Energetskog bilansa Kantona Sarajevo za 2019](https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/bilans_energetskih_potreba_2020.pdf)
 
-[Energetskog bilansa Kantona Sarajevo za 2018](https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_energ._potreba_2019.pdf)
-
-[Energetskog bilansa Kantona Sarajevo za 2017](https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_ener_potreba.pdf)
-
-Energetskog bilansa Kantona Sarajevo za 2016 - not available online
-
-<!-- https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_e_potreba_0.pdf -->
-<!-- https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/bilans_energetskih_potreba_2020.pdf -->
-<!-- https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_energ._potreba_2019.pdf -->
-<!-- https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_ener_potreba.pdf -->
-<!-- 2017 has not been posted online -->
-
+***
 
 ## Oportunities and challenges
-
 
 ### Always up-to-date GHG monitoring
 
@@ -83,18 +70,20 @@ knitr::kable(tabb, "simple",align=c("l","c","c"), caption = "Table 2 - Example o
 ```
 
 
-### Mitigation potential of measures
-
-
 ### Identification of critical regions
 
-Although the energy balances provide a lump-sum of the energy needs in the canton, for the planning and implementation of measures and policies a more granular spatial and temporal desegregation would be advantageous. For example, the emissions from liquid fuels could be made spatialy explicit for the case of transport by tapping into activity data from commercial providers (see Map 1) or data available in other ministries such as public transport usage, number of resisted vehicles and type, etc. This would allow to identify critical areas of intervention - see Map 1.
+Energy balances provide a lump-sum of the energy needs in the canton but for the planning and implementation of measures and policies a more granular spatial and temporal desegregation would be advantageous. For example, the emissions from liquid fuels could be made spatial for the case of transport by tapping into activity data from [comercial providors](https://www.tomtom.com/) (see Map 1) or data available in other ministries such as public transport usage, number of resisted vehicles and type, etc. This would allow to identify critical areas of intervention - see Map 1.
 
 ![Map 1 - TomTom hit index for Sarajevo (higher index values indicate the existence of larger traffic flows)](https://ghg-sarajevo.s3.eu-central-1.amazonaws.com/tomtom22.jpg){width=700px}
 
+### Mitigation potential of measures
+
+Building on a better knowledge of the spatial heterogenity of emission, the effect of 
+
+
 ### Long-term planning
 
-Correlating energy usages for the canton of Sarajevo with seasonal-dependent variables (see Figure 2) would allow to estimate the influence of long-term climate change in the energy needs of the canton, and by extent its effect on GHG emissions. In the example provided the hilighted dependency between gas consumption in households and temperature could be easily plugged-in to regional climate projection from the [IPCC](https://interactive-atlas.ipcc.ch/regional-information#eyJ0eXBlIjoiQVRMQVMiLCJjb21tb25zIjp7ImxhdCI6OTc3MiwibG5nIjo0MDA2OTIsInpvb20iOjQsInByb2oiOiJFUFNHOjU0MDMwIiwibW9kZSI6InNpbXBsZV9hdGxhcyJ9LCJwcmltYXJ5Ijp7InNjZW5hcmlvIjoic3NwNTg1IiwicGVyaW9kIjoiMiIsInNlYXNvbiI6InllYXIiLCJkYXRhc2V0IjoiQ01JUDYiLCJ2YXJpYWJsZSI6InRhcyIsInZhbHVlVHlwZSI6IkFOT01BTFkiLCJoYXRjaGluZyI6IlNJTVBMRSIsInJlZ2lvblNldCI6ImFyNiIsImJhc2VsaW5lIjoicHJlSW5kdXN0cmlhbCIsInJlZ2lvbnNTZWxlY3RlZCI6W119LCJwbG90Ijp7ImFjdGl2ZVRhYiI6InBsdW1lIiwibWFzayI6Im5vbmUiLCJzY2F0dGVyWU1hZyI6bnVsbCwic2NhdHRlcllWYXIiOm51bGwsInNob3dpbmciOmZhbHNlfX0=).  
+Correlating energy usages for the canton of Sarajevo with seasonal-dependent variables (see Figure 2) would allow to estimate the influence of long-term climate change in the energy needs of the canton, and by extent its effect on GHG emissions. In the example provided the highlighted dependency between gas consumption in households and temperature could be easily plugged-in to regional climate projection from the [IPCC](https://interactive-atlas.ipcc.ch/).  
 
 ```{r gas-household, echo=FALSE, fig.cap="Figure 2 - Gas consumption in households vs monthly temperature (2018 to 2020)"}
 mt<-c(0.9025658065,-1.754818179,2.503666806,11.7741471,14.28444081,15.69864167,
@@ -117,10 +106,25 @@ plot(mt,gashousehold, pch=16, cex=2, col="#feb24c",
      xlab="Temperature (ºC)",
      ylab="Sm3 x 1000",
      cex.lab=1.2, cex.axis=1.2,
-     #main="Gas consumption in households vs monthly temperature"
+     main="Gas consumption vs monthly temperature in Sarajevo"
      )
 lines(mtx,fitgas, lwd=3, col="#dd1c77")
 abline(v=0,lwd=2, lty=2, col="grey60")
 
 ```
 
+***
+
+## References
+
+[Energetskog bilansa Kantona Sarajevo za 2020](https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_e_potreba_0.pdf)
+
+[Energetskog bilansa Kantona Sarajevo za 2019](https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/bilans_energetskih_potreba_2020.pdf)
+
+[Energetskog bilansa Kantona Sarajevo za 2018](https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_energ._potreba_2019.pdf)
+
+[Energetskog bilansa Kantona Sarajevo za 2017](https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_ener_potreba.pdf)
+
+Energetskog bilansa Kantona Sarajevo za 2016 - not available online
+
+***

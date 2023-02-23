@@ -1,6 +1,6 @@
 name: "Saravejo"
 navbar:
-  title: "Saravejo"
+  title: "GHG inventory"
   left:
     - text: "Start"
       href: index.html
