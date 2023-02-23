@@ -1,11 +1,11 @@
-name: "MyLabJournal"
+name: "Saravejo"
 navbar:
-  title: "MyLabJournal"
+  title: "Saravejo"
   left:
-    - text: "Home"
+    - text: "Start"
       href: index.html
-    - text: "Journal"
-      href: Journal.html
-    - text: "Links"
+    - text: "Monitoring"
       href: Links.html
+    - text: "Methodology"
+      href: Journal.html
 output_dir: "docs"

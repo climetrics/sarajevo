@@ -1,128 +1,73 @@
 ---
-title: "Journal"
+title: ""
 output:
   html_document:
     toc: true
     toc_float: true
-    collapsed: false
-    number_sections: false
-    toc_depth: 1
-    #code_folding: hide
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+
+library(tidyverse)
+library(googlesheets4)
+library(plotly)
 ```
+</style>
 
-IMPORTANT: You can delete everything in here and start fresh. You might want to start by not deleting anything above this line until you know what that stuff is doing.
+<div class="row" style="padding-top: 30px;">
+<div class="col-sm-8">
+<div align="justify">
+
+## Methodology
+
+Overall methodology to determine sector GHG emission is shown in Figure 2. First the values of fuel and energy usage contained in the energy balances are structured along relevant sectors that better match those in the CoM template. Then emission factors are applied accordingly covering fuel to energy or energy directly into CO2 and CH4 emissions. This procedure is common for the cases of emission in the transport, buildings, electricity and industry. For the case of CH4 emissions from waste disposal are determined following the approach [IPCC default method approach](https://www.ipcc-nggip.iges.or.jp/public/gp/bgp/5_1_CH4_Solid_Waste.pdf).
 
 
-This is an .Rmd file. It is plain text with special features. Any time you write just like this, it will be compiled to normal text in the website. If you put a \# in front of your text, it will create a top level-header.
+![Figure 2 - Overall methodology converting energy to GHG emissions](https://ghg-sarajevo.s3.eu-central-1.amazonaws.com/method.jpg)
 
-# My first post
+## Emission factors
 
-2018 | 7 | 23 Last compiled: `r Sys.Date()`
+To convert energy values into CO2 and CH4 gases released into the atmosphere a number of so-called emission factors are used. These are reported in Tables 1 and 2 and are broadly equal to those in Sarajevo's Sustainable Energy and Adaptation Plan (SEAP) submitted to the CoM in 2008.
 
-Notice that whatever you define as a top level header, automatically gets put into the table of contents bar on the left. 
-
-## Second level header
-
-You can add more headers by adding more hashtags. These won't be put into the table of contents
-
-### third level header
-
-Here's an even lower level header
-
-# My second post (note the order)
-
-2018 | 7 | 23 Last compiled: `r Sys.Date()`
-
-I'm writing this tutorial going from the top down. And, this is how it will be printed. So, notice the second post is second in the list. If you want your most recent post to be at the top, then make a new post starting at the top. If you want the oldest first, do, then keep adding to the bottom
-
-# Adding R stuff
-
-So far this is just a blog where you can write in plain text and serve your writing to a webpage. One of the main purposes of this lab journal is to record your progress learning R. The reason I am asking you to use this process is because you can both make a website, and a lab journal, and learn R all in R-studio. This makes everything really convenient and in the sam place. 
-
-So, let's say you are learning how to make a histogram in R. For example, maybe you want to sample 100 numbers from a normal distribution with mean = 0, and standard deviation =1, and then you want to plot a histogram. You can do this right here by using an r code block, like this:
-
-```{r}
-samples <- rnorm(100, mean=0, sd=1)
-hist(samples)
-```
-
-When you knit this R Markdown document, you will see that the histogram is printed to the page, along with the R code. This document can be set up to hide the R code in the webpage, just delete the comment (hashtag), from the cold folding option in the yaml header up top. For purposes of letting yourself see the code, and me see the code, best to keep it the way that it is. You learn all of these things and more can be customized in each R code block.
-
-# The big idea
-
-Use this lab journal to record what you do in R. This way I will be able to see what you are doing and help you along the way. You will also be creating a repository of all the things you do. You can make posts about everything. Learning specific things in R (project unrelated), and doing things for the project that we will discuss at the beginning of the Fall semester. You can get started now by fiddling around with googling things, and trying stuff out in R. I've placed some helpful starting links in the links page on this website
-
-# What can you do right now by yourself?
-
-It's hard to learn programming when you don't have specific problems that you are trying to solve. Everything just seems abstract.
-
-I wrote an [introductory programming book that introduces R](https://crumplab.github.io/programmingforpsych/), and gives some [concrete problems for you to solve](https://crumplab.github.io/programmingforpsych/programming-challenges-i-learning-the-fundamentals.html). 
-
-To get the hang of journaling and solving the problems to learn programming, my suggestion is that you use this .Rmd file to solve the problems. It would look like this:
-
-# Problem 1
-
-Do simple math with numbers, addition, subtraction, multiplication, division
-
-```{r}
-1+2
-2*5
-5/3
-(1+6+4)/5
+```{r, echo=FALSE}
+fuel<-c("Heating","Electricity","Natural gas","Fuel oil","LPG","Mazut","Lignite","Gasoline","Diesel","Wood","Wood")
+conversion<-c("MWh to ton CO2","MWh to ton CO2","TJ to ton CO2","TJ to ton CO2","TJ to ton CO2","TJ to ton CO2",
+              "TJ to ton CO2","TJ to ton CO2","TJ to ton CO2","TJ to ton CO2","MWh to ton CO2")
+factor<-c("0.282","0.72","56.99","71.83","63.89","78.23","101.2","70.08","73.91","0","0.43")
+source<-c("Sarajevo 2008 SEAP","IEA (2011), published by ADEME","Sarajevo 2008 SEAP","Sarajevo 2008 SEAP",
+          "Sarajevo 2008 SEAP","Sarajevo 2008 SEAP","Sarajevo 2008 SEAP","Sarajevo 2008 SEAP","Sarajevo 2008 SEAP",
+          "Sarajevo 2008 SEAP (assumes that all wood is sustainably extracted)","IPCC (assumes that wood is not sustianbly extracted)")
+tab1<-cbind.data.frame("Energy vector"=fuel,"conversion"=conversion,"factor"=factor,"source"=source)
+knitr::kable(tab1, "simple", caption = "Table 1 - Emission factors used for energy-CO2 conversions")
 
 ```
 
-# Problem 2
+Energy to CH4 (methane) conversion factors were also used in order to provide final GHG emissions in CO2eq. These factors are showin in Table 2 and are taken from the [IPCC 2006 Guidelines for National Greenhouse Gas Inventories](https://www.ipcc-nggip.iges.or.jp/public/2006gl/vol2.html).
 
-Put numbers into variables, do simple math on the variables
 
-```{r}
-a<-1
-b<-2
-a+b
-
-d<-c(1,2,3)
-e<-c(5,6,7)
-d+e
-d*e
-d/e
+```{r, echo=FALSE}
+fuel2<-c("Natural gas","Fuel oil","LPG","Mazut","Lignite","Gasoline","Diesel","Wood")
+conversion2<-c("TJ to ton CH4","TJ to ton CH4","TJ to ton CH4","TJ to ton CH4",
+              "TJ to ton CH4","TJ to ton CH4","TJ to ton CH4","TJ to ton CH4")
+factor2<-c("0.005","0.005","0.005","0.005","0.010","0.005","0.005","0.3")
+source2<-c("IPCC 2006","IPCC 2006","IPCC 2006","IPCC 2006","IPCC 2006","IPCC 2006","IPCC 2006","IPCC 2006")
+tab2<-cbind.data.frame("Energy vector"=fuel2,"conversion"=conversion2,"factor"=factor2,"source"=source2)
+knitr::kable(tab2, "simple", caption = "Table 2 - Emission factors used for energy-CO2 conversions")
 
 ```
 
-# Problem 3
+Since the elaboration of the GHG inventory information on emission factors started being [organized sistematicaly](https://www.climatiq.io/) along the lines of countries and activities and increasingly available. This allows to expand on the admittedly narrow range of emission factors available which narrows comparability. In Table 3 a comparison is provided for the case of emission associated with electricity supply.
 
-Write code that will place the numbers 1 to 100 separately into a variable using for loop. Then, again using the seq function.
-
-```{r}
-# for loop solution
-# i becomes the number 1 to 100 at each step of the loop
-
-
-a <- length(100) # make empty variable, set length to 100
-for (i in 1:100){
-  a[i] <-i #assigns the number in i, to the ith index of a
-}
-
-print(a)
-
-# for loop solution #2
-
-a<-c() #create empty variable using combine command
-for (i in 1:100){
-  a<-c(a,i) # keeps combining a with itself and the new number in i
-}
-print(a)
-
-# seq solution
-a <- seq(1,100,1) # look up help for seq using ?seq() in console
-print(a)
+```{r, echo=FALSE}
+activity<-c("Electricity from grid","Electricity from grid","Electricity from grid")
+region<-c("Bosnia and Herzegovina","Bosnia and Herzegovina","Bosnia and Herzegovina")
+factor3<-c("0.723","0.5585","1.046")
+year<-c("2021","2020","2017")
+conversion3<-c("kWh to CO2e","kWh to CO2e","kWh to CO2e")
+source3<-c("ADEME","AIB","CHG protocol")
+tab2<-cbind.data.frame("Activity"=activity,"Region"=region,"Conversion"=conversion3,"Factor"=factor3,"source"=source3)
+knitr::kable(tab2, "simple", caption = "Table 3 - Comparisson of emission factors for electricty supply")
 
 ```
-
-# Replace this with problem 4
-
-And keep going. Try to solve the problems with different scripts that provide the same solution. Good luck, Happy coding.

@@ -1,19 +1,84 @@
 ---
-title: "Resources"
-output: html_document
+title: ""
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
 ---
 
-### R and R-Studio
 
-[R](http://www.r-project.org) is a free open-source programming language that can be used for statistical analysis, data-simulation, graphing, and lots of other stuff. Another free program is [R-studio](http://www.rstudio.com), that provides a nice graphic interface for R. Download R first, then download R-studio. Both can run on PCs, Macs or Linux. Students will be learning R in the stats labs using the lab manual []().
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
 
-### Additional R resources
+library(tidyverse)
+library(RColorBrewer)
+library(googlesheets4)
+library(plotly)
+library(dplyr)
+library(rsconnect)
+```
 
-1. Google is great, Google your problem
-2. [Stackoverflow](https://stackoverflow.com) is great, google will often take you there because someone has already asked your question, and someone else has answered, usually many people have answered your question many ways.
-3. Danielle Navarro wrote a [free Psych Stats textbook using R](https://compcogscisydney.org/learning-statistics-with-r/), it's worth checking out (some of our textbook are based on Danielle's)
-4. I am currently writing another stats textbook (incorporating some of the above). You can read it while it's being made right here [https://crumplab.github.io/statistics/](https://crumplab.github.io/statistics/), also check out the lab manual for more specific things about doing various stats in R (also in draft right now) [https://crumplab.github.io/statisticsLab/](https://crumplab.github.io/statisticsLab/)
-5. Daniell Navarro recently made this website for introducing R, it's great, check it out (also made using this R markdown process): [http://compcogscisydney.org/psyr/](http://compcogscisydney.org/psyr/)
-6. Check out my slightly older programming book that also introduces R [https://crumplab.github.io/programmingforpsych/](https://crumplab.github.io/programmingforpsych/)
-7. This is the definitive guide for all things R Markdown (you will find this very useful as you get better at this skill): [https://bookdown.org/yihui/rmarkdown/](https://bookdown.org/yihui/rmarkdown/)
+</style>
+
+<div class="row" style="padding-top: 30px;">
+<div class="col-sm-8">
+<div align="justify">
+
+## Current trends
+
+### Overall GHG emissions
+
+Between 2016 and 2020 GHG emission from canton Sarajevo grew at a rate of about 2.1% a year - see Figure 1 grey bars. The dip in 2020 motivated by COVID-19 lock-down is likely to be short-lived and a rebound on emissions in 2021 and 2022 is expected in line with [global trends](https://www.nature.com/articles/d41586-021-03036-x). Assuming a relative rebound of emissions for 2021 similar to that observed for the [EU](https://www.nature.com/articles/d41586-021-03036-x) implies an estimate of about 2300 Thousand tons CO~2eq~ for canton Sarajevo - see Figure 1 blue bars. Such a development would further place the current emission trajectory at odds with that necessary for a 80% cut in emission by 2050 - see Figure 1 grey bars. On a per-capita basis the emissions in canton Sarajevo are estimated at circa 5.1 tons CO~2eq~ for the year 2021. Details about the methodology, scope and data sources used can be found in the GHG emission inventory tab.
+
+```{r monitor,echo=FALSE, fig.cap="Figure 1 - GHG emissions in canton Sarajevo"}
+
+emi.monitor<-cbind.data.frame("Year" = c(2016:2050),
+                              "GHG"=c(2000.68,2026.70,2116.71,2276.25,2163.30,
+                                      2300,2300,
+                                      seq(2163.30,457.6, length.out=28)))
+
+p<-plot_ly(emi.monitor, x =~Year, y=~GHG, 
+        type = "bar" ,  #specifies the chart is a scatter plot
+        #color= c(rep("blue",5), rep("red",30)),
+        colors=colorRamp(c( "skyblue","grey60","palegreen4")),
+        color= c(rep("Observed",5),rep("Assuming 6.5% rebound",2),rep("Trajectory for 80% reductions in 2050",28)),
+        width = 700,
+        height = 250)
+
+p <- p %>% layout(title = '',
+         xaxis = list(title = 'Year',
+                      zeroline = TRUE,
+                      range = c(2015,2051)),
+         yaxis = list(title = 'Thousand tons (CO2e)',
+                      range = c(0,2700)))
+p
+
+```
+### Sector decomposition
+
+In terms of sector breakdown, residential buildings and road transport dominate the share of total emissions in the canton - see Figure 2. Combined, these two sectors were associated with over 60% of total emissions in the year 2020. Non-residential buildings associated with services and commerce make up circa 13% of emissions while the industry sector is associated with 15% of total GHG emissions. Emissions from electricity are accounted in each sector respectively. How sector-specific emissions evolved post-pandemic is unclear but judging from other [monitoring services](https://carbonmonitor.org/variation) transport, power and industry should lead the way. Note that the sector breakdown presented in Figure 2 tries to be as close as possible to that required by the [Covenant of Mayors](https://www.globalcovenantofmayors.org/) (CoM) but other allocations are possible.
+
+```{r sector, echo=FALSE, fig.cap="Figure 2 - GHG emissions in the year 2020"}
+
+p2 <- plot_ly(cbind.data.frame("Sector"=c("Residential buildings","Tertiatry buildings","District heating",
+                                          "Public lighting","Municipal buildings","Road transport","Industry",
+                                          "Waste"), "GHG"=c(562.78,231.05,115.15,19.09,10.93,572.07,270.49,31.32)),
+              labels = ~Sector, values = ~GHG, type = 'pie',width = 600, height = 250)
+p2 <- p2 %>% layout(title = '',
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+p2
+
+```
+Sectors exhibit marked differences regarding past trends of GHG emissions - see Table 1. Disregarding the year 2020 due to the economic and behavior distortions introduced by the global pandemic, one can observe a sharp increase of yearly emissions from the household sector (including electricity and district heating) in the order of 4.5%/year. Road transportation has increased about 1.6%/year between 2016 and 2019 while the increase in municipal services (which includes gas consumption in municipal buildings and public lighting) has been moderate and below 1%/year.
+
+```{r, echo=FALSE}
+sector.t<-c("Households","Tertiatry buildings","Road transport","Industry","Municipal services")
+sector.tv<-c(4.5,1.6,1.4,1.3,0.8)
+  
+taba<-cbind.data.frame("Sector"=sector.t,"Average % change"=sector.tv)
+knitr::kable(taba, "simple", caption = "Table 1 - Average change for the 2016-2019 period")
+
+```
 

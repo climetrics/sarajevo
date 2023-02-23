@@ -1,43 +1,126 @@
 ---
-title: "MyLabJournal"
-output: html_document
+title: ""
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
 ---
 
-<style type="text/css">
-.title {
-  display: none;
-}
+<!-- <style type="text/css"> -->
+<!-- .title { -->
+<!--   display: none; -->
+<!-- } -->
 
-#getting-started img {
-  margin-right: 10px;
-}
+<!-- #getting-started img { -->
+<!--   margin-right: 10px; -->
+<!-- } -->
 
 </style>
 
 <div class="row" style="padding-top: 30px;">
-<div class="col-sm-6">
+<div class="col-sm-8">
+<div align="justify">
 
-# **My Lab Journal**
+## Sarajevo emission inventory
+### Summary
+This website details the data and methodology for converting Sarajevo's energy balances into a Greenhouse Gas (GHG) inventory. The inventory covers the energy intensive sectors of buildings, electricity, transport and industry. In addition, emissions associated with waste disposal are also evaluated (see FIgure 1).
 
-This is a template example for lab journaling. Students in Matt Crump's Human Cognition and Performance Lab will use this template to learn R, and other things. Students can replace this text with more fun things. People not in my lab can use this too.
+![Figure 1 - Economic sectors included in the emission inventory](https://ghg-sarajevo.s3.eu-central-1.amazonaws.com/scope.jpg){width=700px}
 
-## How to use
+The bulk of the data used is taken from the energy balances published by the Ministry of Economy [(Ministarstvo privrede)](https://mp.ks.gov.ba/) and included the needs for electricity, natural gas, oil derivatives and solid fuels associated with annual consumption in the canton. Balances were available on an yearly basis and for the purposes of this inventory data for the years 2016 to 2020 is used.
 
-1. fork the repo for this website and follow instructions on read me to get set up. [https://github.com/CrumpLab/LabJournalWebsite](https://github.com/CrumpLab/LabJournalWebsite)
+[Energetskog bilansa Kantona Sarajevo za 2020](https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_e_potreba_0.pdf)
 
-2. Blog/journal what you are doing in R, by editing the Journal.Rmd. See the [Journal page](https://crumplab.github.io/LabJournalWebsite/Journal.html) for an example of what to do to get started learning R.
+[Energetskog bilansa Kantona Sarajevo za 2019](https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/bilans_energetskih_potreba_2020.pdf)
 
-3. See the [links page](https://crumplab.github.io/LabJournalWebsite/Links.html) for lots of helpful links on learning R.
+[Energetskog bilansa Kantona Sarajevo za 2018](https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_energ._potreba_2019.pdf)
 
-4. Change everything to make it your own.
+[Energetskog bilansa Kantona Sarajevo za 2017](https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_ener_potreba.pdf)
+
+Energetskog bilansa Kantona Sarajevo za 2016 - not available online
+
+<!-- https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_e_potreba_0.pdf -->
+<!-- https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/bilans_energetskih_potreba_2020.pdf -->
+<!-- https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_energ._potreba_2019.pdf -->
+<!-- https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_ener_potreba.pdf -->
+<!-- 2017 has not been posted online -->
 
 
-</div>
-<div class="col-sm-6">
+## Oportunities and challenges
 
-### [Crump Lab: Human Cognition and Performance](https://crumplab.github.io)
 
-<a href = "https://crumplab.github.io">
-![](images/logo.png)
-</a>
-</div>
+### Always up-to-date GHG monitoring
+
+Although not an exciting task, GHG monitoring is unavoidable in order to evaluate progress towards decarbonisation. Fortunately, the energy balances as published by the Ministry of Economy [(Ministarstvo privrede)](https://mp.ks.gov.ba/) are regularly published and their information well suited to be the cornerstone of Sarajevo's GHG monitoring. Balances were extensively used in this reporting - see GHG emission inventory tab - and through our experience it would be relatively easy to interface the results into a regular GHG monitoring scheme. Basic steps and recommendations to achieve this are briefly enumerated below.
+
+* Align with *Ministarstvo* *privrede* the key data items needed (max. 2h meeting)
+  + Only between 20 and 30 items really fundamental 
+  + Agree on fuel-energy conversion factors
+  + Discuss allocation of energy/fuel items to economic sectors
+    - Including the allocation as in the CoM
+* Establish an online sheet were items could be provided as balances are approved
+  + A preliminary one already exists - not starting from zero
+  + Instruct the authors of the energy balances on how to fill the table (max. 1h meeting)
+* Update the current report on the basis of new data (max 1.5 day-work)
+  + Re-work trends and plots
+  + Adjust text and tables
+  + Send for city's approval
+* Publish approved GHG monitoring report
+
+### Compatibility with CoM
+
+As far as possible we tried to aligned the sector breakdown to that required by the Covenant of [Covenant of Mayors](https://eu-mayors.ec.europa.eu/en/home)(CoM). Accordingly it would be straightforward to report GHG results in the same table format as required byt the CoM making the elaboration and update of future SECAPs much easier - see example below.
+
+```{r, echo=FALSE}
+sector.com<-c("Municipal buildings","Public lighting","Terciary buildings","Residential buildings")
+sector.com.elec<-c(45053,19089,205584,460534)
+sector.com.gas<-c(10934,"NA" ,25465,102241)
+  
+tabb<-cbind.data.frame("Sector"=sector.com,"Electricity"=sector.com.elec,"Natural gas"=sector.com.gas)
+knitr::kable(tabb, "simple",align=c("l","c","c"), caption = "Table 2 - Example of GHG reporting table for the CoM (values in tons CO2eq)")
+
+```
+
+
+### Mitigation potential of measures
+
+
+### Identification of critical regions
+
+Although the energy balances provide a lump-sum of the energy needs in the canton, for the planning and implementation of measures and policies a more granular spatial and temporal desegregation would be advantageous. For example, the emissions from liquid fuels could be made spatialy explicit for the case of transport by tapping into activity data from commercial providers (see Map 1) or data available in other ministries such as public transport usage, number of resisted vehicles and type, etc. This would allow to identify critical areas of intervention - see Map 1.
+
+![Map 1 - TomTom hit index for Sarajevo (higher index values indicate the existence of larger traffic flows)](https://ghg-sarajevo.s3.eu-central-1.amazonaws.com/tomtom22.jpg){width=700px}
+
+### Long-term planning
+
+Correlating energy usages for the canton of Sarajevo with seasonal-dependent variables (see Figure 2) would allow to estimate the influence of long-term climate change in the energy needs of the canton, and by extent its effect on GHG emissions. In the example provided the hilighted dependency between gas consumption in households and temperature could be easily plugged-in to regional climate projection from the [IPCC](https://interactive-atlas.ipcc.ch/regional-information#eyJ0eXBlIjoiQVRMQVMiLCJjb21tb25zIjp7ImxhdCI6OTc3MiwibG5nIjo0MDA2OTIsInpvb20iOjQsInByb2oiOiJFUFNHOjU0MDMwIiwibW9kZSI6InNpbXBsZV9hdGxhcyJ9LCJwcmltYXJ5Ijp7InNjZW5hcmlvIjoic3NwNTg1IiwicGVyaW9kIjoiMiIsInNlYXNvbiI6InllYXIiLCJkYXRhc2V0IjoiQ01JUDYiLCJ2YXJpYWJsZSI6InRhcyIsInZhbHVlVHlwZSI6IkFOT01BTFkiLCJoYXRjaGluZyI6IlNJTVBMRSIsInJlZ2lvblNldCI6ImFyNiIsImJhc2VsaW5lIjoicHJlSW5kdXN0cmlhbCIsInJlZ2lvbnNTZWxlY3RlZCI6W119LCJwbG90Ijp7ImFjdGl2ZVRhYiI6InBsdW1lIiwibWFzayI6Im5vbmUiLCJzY2F0dGVyWU1hZyI6bnVsbCwic2NhdHRlcllWYXIiOm51bGwsInNob3dpbmciOmZhbHNlfX0=).  
+
+```{r gas-household, echo=FALSE, fig.cap="Figure 2 - Gas consumption in households vs monthly temperature (2018 to 2020)"}
+mt<-c(0.9025658065,-1.754818179,2.503666806,11.7741471,14.28444081,15.69864167,
+17.57554,18.43382581,14.20204663,10.71131355,5.488364467,-1.086490742,-3.762622839,
+0.4023920714,4.851876613,8.351009733,9.551090194,18.30351333,18.18998452,19.49580516,
+14.28894017, 10.887142,7.876326567,1.657329613, -1.107038742,2.255532345,3.668039452,
+8.122808067, 11.29594687, 15.2430507,17.62080323,18.87430677,15.34709777,9.636083452,
+4.6364434,2.893502323)
+
+gashousehold<-c(6843.323,7026.999,6036.942,1855.663,1035.699,860.905,720.122,699.094,
+981.054,2560.578,4783.179,8445.186,9548.344,6827.732,4885.385,2961.997,2630.004,
+1027.629,701.236,700.79,1000.441,2513.554,3820.652,7109.622,9453.915,6431.562,
+5430.772,2786.436,1879.955,1056.968,772.968,689.348,943.315,3100.126,5972.107,
+6952.021)
+mtx<-c(25:-10)
+fitgas<-7542-(606*mtx)+(12.3*mtx^(2))
+
+plot(mt,gashousehold, pch=16, cex=2, col="#feb24c",
+     #xlim=c(-5,20),ylim=c(500,8000),
+     xlab="Temperature (ºC)",
+     ylab="Sm3 x 1000",
+     cex.lab=1.2, cex.axis=1.2,
+     #main="Gas consumption in households vs monthly temperature"
+     )
+lines(mtx,fitgas, lwd=3, col="#dd1c77")
+abline(v=0,lwd=2, lty=2, col="grey60")
+
+```
+
