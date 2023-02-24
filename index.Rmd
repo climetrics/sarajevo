@@ -65,7 +65,7 @@ sector.com.elec<-c(45053,19089,205584,460534)
 sector.com.gas<-c(10934,"NA" ,25465,102241)
   
 tabb<-cbind.data.frame("Sector"=sector.com,"Electricity"=sector.com.elec,"Natural gas"=sector.com.gas)
-knitr::kable(tabb, "simple",align=c("l","c","c"), caption = "Table 2 - Example of GHG reporting table for the CoM (values in tons CO2eq)")
+knitr::kable(tabb, "simple",align=c("l","c","c"), caption = "Table 1 - Example of GHG reporting table for the CoM (values in tons CO2eq)")
 
 ```
 
@@ -76,14 +76,9 @@ Energy balances provide a lump-sum of the energy needs in the canton but for the
 
 ![Map 1 - TomTom hit index for Sarajevo (higher index values indicate the existence of larger traffic flows)](https://ghg-sarajevo.s3.eu-central-1.amazonaws.com/tomtom22.jpg){width=700px}
 
-### Mitigation potential of measures
-
-Building on a better knowledge of the spatial heterogenity of emission, the effect of 
-
-
 ### Long-term planning
 
-Correlating energy usages for the canton of Sarajevo with seasonal-dependent variables (see Figure 2) would allow to estimate the influence of long-term climate change in the energy needs of the canton, and by extent its effect on GHG emissions. In the example provided the highlighted dependency between gas consumption in households and temperature could be easily plugged-in to regional climate projection from the [IPCC](https://interactive-atlas.ipcc.ch/).  
+Correlating household gas consumption with seasonal-dependent variables (see Figure 2) woulds to estimate the influence of long-term climate change in energy demand cof the canton Sarajevo, and by extent its effect on GHG emissions. In the example provided, the highlighted dependency between gas consumption in households and temperature could be easily integrated in regional climate projection from the [IPCC](https://interactive-atlas.ipcc.ch/) in order to evaluate long-term needs for gas supply.  
 
 ```{r gas-household, echo=FALSE, fig.cap="Figure 2 - Gas consumption in households vs monthly temperature (2018 to 2020)"}
 mt<-c(0.9025658065,-1.754818179,2.503666806,11.7741471,14.28444081,15.69864167,
@@ -115,7 +110,28 @@ abline(v=0,lwd=2, lty=2, col="grey60")
 
 ***
 
+### From measures to GHG reductions
+
+Finally, an adequate leverage of the existing energy balances would allow the canton to initiate the process of investigating how infrastructure, regulatory and economic measures would translate to energy and GHG savings. For example, such could be done by looking to previous studies investigating the deployment of measures and measuring the subsequent effects (see Table 2). For the example provided its investigated the range of energy reductions in households brought about by the introduction of smart-meters. Savings in energy are then easily converted to GHG reductions.
+
+```{r, echo=FALSE}
+country<-c("UK","Italy","China","Spain","Poland")
+city<-c("Exeter","Nationwide","Shangai","Bilbao","Lublin")
+dimension<-c("Gas consumption","Electricity","Electricity","Heat and hot water","Heat")
+red.s<-c(-22,-18,-11,-15,-20)
+samples<-c("73 housholds","31 families","NA","142 dwellings","1 multi-family dwelling")
+
+tabsm<-cbind.data.frame("Country"=country,"City"=city,"Usage"=dimension, "Reductions (%)"=red.s,
+                        "Sample"=samples)
+knitr::kable(tabsm, "simple",align=c("l","l","l","c","l"), caption = "Table 2 - Reduction in energy use following the introduction of smart meters (see section References for the original studies)")
+
+```
+
+***
+
 ## References
+
+### Energy balances
 
 [Energetskog bilansa Kantona Sarajevo za 2020](https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_e_potreba_0.pdf)
 
@@ -126,5 +142,15 @@ abline(v=0,lwd=2, lty=2, col="grey60")
 [Energetskog bilansa Kantona Sarajevo za 2017](https://skupstina.ks.gov.ba/sites/skupstina.ks.gov.ba/files/odluka_bilans_ener_potreba.pdf)
 
 Energetskog bilansa Kantona Sarajevo za 2016 - not available online
+
+### Energy reductions from smart-meters 
+
+[D’Oca, S., Corgnati, S. P., & Buso, T. (2014). Smart meters and energy savings in Italy: Determining the effectiveness of persuasive communication in dwellings. Energy Research & Social Science,3, 131-142.](https://www.sciencedirect.com/science/article/abs/pii/S2214629614000930)
+
+[Zhang, X., Shen, J., Yang, T., Tang, L., Wang, L., Liu, Y., & Xu, P. (2019). Smart meter and in-home display for energy savings in residential buildings: a pilot investigation in Shanghai, China. Intelligent Buildings International, 11(1), 4-26.](https://www.tandfonline.com/doi/full/10.1080/17508975.2016.1213694)
+
+[Teres-Zubiaga, J., Pérez-Iribarren, E., González-Pino, I., & Sala, J. M. (2018). Effects of individual metering and charging of heating and domestic hot water on energy consumption of buildings in temperate climates. Energy conversion and management, 171, 491-506.](https://www.sciencedirect.com/science/article/abs/pii/S0196890418306228?via%3Dihub)
+
+[Mogles, N., Walker, I., Ramallo-González, A.P., Lee, J., Natarajan, S., Padget, J., Gabe-Thomas, E., Lovett, T., Ren, G., Hyniewska, S. and O'Neill, E., 2017. How smart do smart meters need to be?. Building and Environment, 125, pp.439-450.](https://www.sciencedirect.com/science/article/pii/S0360132317304225)
 
 ***
