@@ -35,7 +35,7 @@ The main results of the inventory can be seen in the section [Monitoring](https:
 
 ***
 
-## Oportunities and challenges
+## Opportunities and challenges
 
 ### Always up-to-date GHG monitoring
 
