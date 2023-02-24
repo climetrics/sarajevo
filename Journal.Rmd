@@ -22,7 +22,7 @@ library(plotly)
 
 ## Methodology
 
-Overall methodology to determine sector GHG emission is shown in Figure 1. First the values of fuel and energy usage contained in the energy balances are structured along relevant sectors that better match those in the CoM template. Then emission factors are applied accordingly covering fuel to energy or energy directly into CO2 and CH4 emissions. This procedure is common for the cases of emission in the transport, buildings, electricity and industry. For the case of CH4 emissions from waste disposal are determined following the approach [IPCC default method approach](https://www.ipcc-nggip.iges.or.jp/public/gp/bgp/5_1_CH4_Solid_Waste.pdf).
+Overall methodology to determine sector GHG emission is shown in Figure 1. First the values of fuel and energy usage contained in the energy balances are structured along relevant sectors that better match those in the CoM template. Then emission factors are applied accordingly covering fuel to energy or energy directly into CO~2~ and CH~4~ emissions. This procedure is common for the cases of emission in the transport, buildings, electricity and industry. For the case of CH~4~  emissions from waste disposal are determined following the approach [IPCC default method approach](https://www.ipcc-nggip.iges.or.jp/public/gp/bgp/5_1_CH4_Solid_Waste.pdf).
 
 
 ![Figure 1 - Overall methodology converting energy to GHG emissions](https://ghg-sarajevo.s3.eu-central-1.amazonaws.com/method.jpg)
@@ -30,7 +30,7 @@ Overall methodology to determine sector GHG emission is shown in Figure 1. First
 
 ## Emission factors
 
-To convert energy values into CO2 and CH4 gases released into the atmosphere a number of so-called emission factors are used. These are reported in Tables 1 and 2 and are broadly equal to those in Sarajevo's Sustainable Energy and Adaptation Plan (SEAP) submitted to the CoM in 2008.
+To convert energy values into CO~2~ and CH~4~  gases released into the atmosphere a number of so-called emission factors are used. These are reported in Tables 1 and 2 and are broadly equal to those in Sarajevo's Sustainable Energy and Adaptation Plan (SEAP) submitted to the CoM in 2008.
 
 ```{r, echo=FALSE}
 fuel<-c("Heating","Electricity","Natural gas","Fuel oil","LPG","Mazut","Lignite","Gasoline","Diesel","Wood","Wood")
@@ -45,7 +45,7 @@ knitr::kable(tab1, "simple", caption = "Table 1 - Emission factors used for ener
 
 ```
 
-Energy to CH4 (methane) conversion factors were also used in order to provide final GHG emissions in CO2eq. These factors are showin in Table 2 and are taken from the [IPCC 2006 Guidelines for National Greenhouse Gas Inventories](https://www.ipcc-nggip.iges.or.jp/public/2006gl/vol2.html).
+Energy to CH4 (methane) conversion factors were also used in order to provide final GHG emissions in CO~2eq~. These factors are shown in Table 2 and are taken from the [IPCC 2006 Guidelines for National Greenhouse Gas Inventories](https://www.ipcc-nggip.iges.or.jp/public/2006gl/vol2.html).
 
 
 ```{r, echo=FALSE}
